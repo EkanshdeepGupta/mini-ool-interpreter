@@ -1096,7 +1096,7 @@ let
 
   | 30 ->
 # 37 "miniOO_LEX.mll"
-        ( raise Eof )
+        ( EOF )
 # 1101 "miniOO_LEX.ml"
 
   | __ocaml_lex_state -> lexbuf.Lexing.refill_buff lexbuf;
