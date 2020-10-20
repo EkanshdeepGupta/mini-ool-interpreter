@@ -34,11 +34,8 @@ rule token = parse
   | '/' { DIV }  
   | '(' { LPAREN }
   | ')' { RPAREN }  
-  | eof { EOF } 
+  | eof { EOF }
 
 {
-  let main () =
-    let lexbuf = Lexing.from_channel stdin in
-    token lexbuf
-    let _ = Printexc.print main ()
+
 }
