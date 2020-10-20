@@ -28,13 +28,13 @@ prog :
   l = cmds EOF {Stmtlist l}
 
 cmds :
-    {Empty}
-  | c=cmd SEMICOLON l=cmds {Stmt (c, l)}
+    c=cmd SEMICOLON l=cmds {Stmt (c, l)}
   | WHILE b=boolean l=cmds {While (b, l)}
   | IF b=boolean l1=cmds ELSE l2=cmds {If (b, l1, l2)}
+  | {Empty}
 
 cmd :
-    VAR_DECL v=VAR SEMICOLON {Declare v}
+    VAR_DECL v=VAR {Declare v}
   | i1=iden LPAREN i2=iden RPAREN {Call (i1, i2)}
   | MALLOC LPAREN v=VAR RPAREN {Malloc v}
   | i=iden ASSIGN e=expr {Assign (i,e)}

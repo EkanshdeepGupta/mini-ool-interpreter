@@ -1106,9 +1106,6 @@ let
 
 # 39 "miniOO_LEX.mll"
  
-  let main () =
-    let lexbuf = Lexing.from_channel stdin in
-    token lexbuf
-    let _ = Printexc.print main ()
 
-# 1115 "miniOO_LEX.ml"
+
+# 1112 "miniOO_LEX.ml"
