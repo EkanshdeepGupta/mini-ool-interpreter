@@ -9,7 +9,7 @@ all: delete
 	ocamlc -c miniOO_MENHIR.mli
 	ocamlc -c miniOO_LEX.ml
 	ocamlc -c miniOO_MENHIR.ml
-	@echo "# compilation of the calculator:"
+	@echo "# compilation of the main file:"
 	ocamlc -c main.ml
 	@echo "# linking of the lexer, parser & everything else:"
 	ocamlc -o main abstractSyntax.cmo staticSemantics.cmo miniOO_LEX.cmo miniOO_MENHIR.cmo main.cmo
