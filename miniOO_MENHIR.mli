@@ -9,6 +9,7 @@ type token =
   | SKIP
   | SEMICOLON
   | RPAREN
+  | RBRACE
   | PROC_DECL
   | PLUS
   | PARALLEL
@@ -19,6 +20,7 @@ type token =
   | LT
   | LPAREN
   | LEQ
+  | LBRACE
   | IF
   | GT
   | GEQ
@@ -30,6 +32,7 @@ type token =
   | DEREFERENCE
   | COLON
   | BOOL of (bool)
+  | ATOM
   | ASSIGN
 
 (* This exception is raised by the monolithic API functions. *)

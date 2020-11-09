@@ -5,8 +5,8 @@ exception Eof;;
 }
 rule token = parse
   | [' ' '\t' '\n'] { token lexbuf } (* skip blanks and tabs *) (* removed newline token *)
-  | "true" { BOOL (true) }
-  | "false" { BOOL (false) } 
+  | "true" { BOOL true }
+  | "false" { BOOL false }
   | "null" { NULL }
   | "proc" { PROC_DECL }
   | "var" { VAR_DECL }
@@ -16,12 +16,15 @@ rule token = parse
   | "if" { IF }
   | "else" { ELSE }
   | "|||" { PARALLEL }
+  | "atom" { ATOM }
   | (['a'-'z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'])* as idt { VAR idt }
   | (['A'-'Z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'])* as idt { FIELD idt }
   | ['0'-'9']+ as num { NUM (int_of_string num) }
   | "==" { EQUALITY } (* decide whether use a string or two chars *)
   | "<=" { LEQ }
   | ">=" { GEQ }
+  | '{' { LBRACE }
+  | '}' { RBRACE }
   | '<' { LT }
   | '>' { GT }  
   | ':' { COLON }

@@ -3,10 +3,10 @@ open AbstractSyntax
 %} /* declarations */
 
 %token EOF NULL PROC_DECL VAR_DECL MALLOC  /* lexer tokens */
-%token SKIP WHILE IF ELSE PARALLEL
+%token SKIP WHILE IF ELSE PARALLEL ATOM
 %token EQUALITY LEQ GEQ LT GT
 %token COLON SEMICOLON ASSIGN DEREFERENCE
-%token PLUS MINUS TIMES DIV LPAREN RPAREN
+%token PLUS MINUS TIMES DIV LPAREN RPAREN LBRACE RBRACE
 %token <string> VAR FIELD
 %token <int> NUM
 %token <bool> BOOL
@@ -18,6 +18,7 @@ open AbstractSyntax
 %type <AbstractSyntax.iden> iden
 %type <AbstractSyntax.iden> iden_fields
 %type <AbstractSyntax.boolexp> boolean /* want boolean here */
+%nonassoc EQUALITY
 %left PLUS MINUS          /* lowest precedence  */
 %left TIMES DIV           /* medium precedence  */
 %nonassoc UMINUS          /* highest precedence */
@@ -31,6 +32,9 @@ cmds :
     c=cmd SEMICOLON l=cmds {Stmt (c, l)}
   | WHILE b=boolean l=cmds {While (b, l)}
   | IF b=boolean l1=cmds ELSE l2=cmds {If (b, l1, l2)}
+  | ATOM LPAREN l=cmds RPAREN {Atom l}
+  | LBRACE l=cmds RBRACE {l} /* decide how to deal with blocks */
+  | LBRACE l1=cmds PARALLEL l2=cmds RBRACE {Parallel (l1, l2)}
   | {Empty}
 
 cmd :
@@ -52,7 +56,7 @@ boolean :
 expr :
     LPAREN e=expr RPAREN {e}
   | n=NUM {Num n}
-  | MINUS n=expr {let fn (Num n) = n in Num (-1 * (fn n))}
+  | MINUS n=expr %prec UMINUS {let fn (Num n) = n in Num (-1 * (fn n))}
   | n1=expr DIV n2=expr {Arith (n1, Div, n2)}
   | n1=expr TIMES n2=expr {Arith (n1, Times, n2)}
   | n1=expr PLUS n2=expr {Arith (n1, Plus, n2)}
