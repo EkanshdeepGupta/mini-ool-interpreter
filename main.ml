@@ -59,7 +59,7 @@ print_prog (Stmtlist p) = print_stmtlist p;;
 
 let lexbuf = (Lexing.from_channel stdin) in
   try
-    if (static_check (MiniOO_MENHIR.prog MiniOO_LEX.token lexbuf)) then print_string "Something is broken" else print_string "Works!"
+    if (static_check (MiniOO_MENHIR.prog MiniOO_LEX.token lexbuf)) then print_string "Static Check Failed." else operational_semantics (MiniOO_MENHIR.prog MiniOO_LEX.token lexbuf)
   with
 | MiniOO_MENHIR.Error ->
 Printf.fprintf stderr "At offset %d: syntax error.\n%!" (Lexing.lexeme_start lexbuf);;

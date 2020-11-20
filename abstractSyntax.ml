@@ -15,13 +15,11 @@ type expr =
 | Proc of var * stmtlist
 
 and
-
 boolexp = 
 | Bool of bool
 | Expression of expr * boolOperator * expr
 
 and
-
 stmt =
 | Declare of var
 | Call of iden * iden
@@ -30,8 +28,7 @@ stmt =
 | Skip
 
 and
-
-stmtlist = 
+stmtlist = (* Big error. One While loop cannot be followed by statements after the loop terminates*)
 | Empty
 | While of boolexp * stmtlist 
 | If of boolexp * stmtlist * stmtlist (* 1st stmtlist if boolexp is true, 2nd for `else`. *) 
