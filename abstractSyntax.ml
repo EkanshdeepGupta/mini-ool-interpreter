@@ -22,18 +22,19 @@ boolexp =
 and
 stmt =
 | Declare of var
-| Call of iden * iden
+| Call of iden * expr
 | Malloc of var
 | Assign of iden * expr
+| While of boolexp * stmtlist 
+| If of boolexp * stmtlist * stmtlist (* 1st stmtlist if boolexp is true, 2nd for `else`. *) 
+| Atom of stmtlist
+| Parallel of stmtlist * stmtlist
 | Skip
 
 and
 stmtlist = (* Big error. One While loop cannot be followed by statements after the loop terminates*)
 | Empty
-| While of boolexp * stmtlist 
-| If of boolexp * stmtlist * stmtlist (* 1st stmtlist if boolexp is true, 2nd for `else`. *) 
 | Stmt of stmt * stmtlist
-| Atom of stmtlist
-| Parallel of stmtlist * stmtlist
+
 
 type prog = Stmtlist of stmtlist

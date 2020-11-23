@@ -30,18 +30,18 @@ prog :
 
 cmds :
     c=cmd SEMICOLON l=cmds {Stmt (c, l)}
-  | WHILE b=boolean l=cmds {While (b, l)}
-  | IF b=boolean l1=cmds ELSE l2=cmds {If (b, l1, l2)}
-  | ATOM LPAREN l=cmds RPAREN {Atom l}
   | LBRACE l=cmds RBRACE {l} /* decide how to deal with blocks */
-  | LBRACE l1=cmds PARALLEL l2=cmds RBRACE {Parallel (l1, l2)}
   | {Empty}
 
 cmd :
     VAR_DECL v=VAR {Declare v}
-  | i1=iden LPAREN i2=iden RPAREN {Call (i1, i2)}
+  | i=iden LPAREN e=expr RPAREN {Call (i, e)}
   | MALLOC LPAREN v=VAR RPAREN {Malloc v}
   | i=iden ASSIGN e=expr {Assign (i,e)}
+  | WHILE b=boolean l=cmds {While (b, l)}
+  | IF b=boolean l1=cmds ELSE l2=cmds {If (b, l1, l2)}
+  | ATOM LPAREN l=cmds RPAREN {Atom l}
+  | LBRACE l1=cmds PARALLEL l2=cmds RBRACE {Parallel (l1, l2)}
   | SKIP {Skip}
 
 boolean :

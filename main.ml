@@ -46,12 +46,13 @@ print_stmt s = match s with
 | Malloc v -> print_string "Malloc: "; print_string v; print_newline ()
 | Assign (id, e) -> print_string "Assign: "; print_iden id; print_expr e; print_newline ()
 | Skip -> print_string "Skip: "; print_newline ()
+| While (b, s) -> print_string "While: "; print_boolexp b; print_stmtlist s
+| If (b, s1, s2) -> print_string "If: "; print_boolexp b; print_stmtlist s1; print_stmtlist s2
 
 and
 print_stmtlist sl = match sl with
   Empty -> ()
-| While (b, s) -> print_string "While: "; print_boolexp b; print_stmtlist s
-| If (b, s1, s2) -> print_string "If: "; print_boolexp b; print_stmtlist s1; print_stmtlist s2
+
 | Stmt (s, s2) -> print_stmt s; print_stmtlist s2
 
 and

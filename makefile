@@ -1,6 +1,7 @@
 all: delete
 	ocamlc -c abstractSyntax.ml
 	ocamlc -c staticSemantics.ml
+	ocamlc -c operationalSemantics.ml
 	@echo "### Lexer:"
 	ocamllex miniOO_LEX.mll
 	@echo "### Parser specification:"
@@ -12,7 +13,7 @@ all: delete
 	@echo "# compilation of the main file:"
 	ocamlc -c main.ml
 	@echo "# linking of the lexer, parser & everything else:"
-	ocamlc -o main abstractSyntax.cmo staticSemantics.cmo miniOO_LEX.cmo miniOO_MENHIR.cmo main.cmo
+	ocamlc -o main abstractSyntax.cmo staticSemantics.cmo operationalSemantics.cmo miniOO_LEX.cmo miniOO_MENHIR.cmo main.cmo
 
 delete:
 	/bin/rm -f main main.cmi main.cmo miniOO_LEX.cmi miniOO_LEX.cmo miniOO_LEX.ml miniOO_MENHIR.cmi miniOO_MENHIR.cmo miniOO_MENHIR.ml miniOO_MENHIR.mli makefile~
