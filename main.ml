@@ -1,5 +1,6 @@
-open AbstractSyntax;;
-open StaticSemantics;;
+open AbstractSyntax
+open StaticSemantics
+open OperationalSemantics
 
 (* let rec print_aexpr a = ...;;
 let rec print_bexpr a = ...;;
@@ -42,17 +43,18 @@ print_boolexp b = match b with
 and
 print_stmt s = match s with
   Declare v -> print_string "Declare: "; print_string v; print_newline ()
-| Call (id1, id2) -> print_string "Call: "; print_iden id1; print_iden id2; print_newline ()
+| Call (id, e) -> print_string "Call: "; print_iden id; print_expr e; print_newline ()
 | Malloc v -> print_string "Malloc: "; print_string v; print_newline ()
 | Assign (id, e) -> print_string "Assign: "; print_iden id; print_expr e; print_newline ()
 | Skip -> print_string "Skip: "; print_newline ()
 | While (b, s) -> print_string "While: "; print_boolexp b; print_stmtlist s
 | If (b, s1, s2) -> print_string "If: "; print_boolexp b; print_stmtlist s1; print_stmtlist s2
+| Atom l -> print_string "Atom: "; print_stmtlist l
+| Parallel (l1, l2) -> print_string "Parallel: "; print_stmtlist l1; print_string "|||"; print_stmtlist l2
 
 and
 print_stmtlist sl = match sl with
   Empty -> ()
-
 | Stmt (s, s2) -> print_stmt s; print_stmtlist s2
 
 and
@@ -60,10 +62,10 @@ print_prog (Stmtlist p) = print_stmtlist p;;
 
 let lexbuf = (Lexing.from_channel stdin) in
   try
-    if (static_check (MiniOO_MENHIR.prog MiniOO_LEX.token lexbuf)) then print_string "Static Check Failed." else operational_semantics (MiniOO_MENHIR.prog MiniOO_LEX.token lexbuf)
+    if (static_check (MiniOO_MENHIR.prog MiniOO_LEX.token lexbuf)) then  ((Stack.create ()), [], 0) else operational_semantics (MiniOO_MENHIR.prog MiniOO_LEX.token lexbuf)
   with
 | MiniOO_MENHIR.Error ->
-Printf.fprintf stderr "At offset %d: syntax error.\n%!" (Lexing.lexeme_start lexbuf);;
+Printf.fprintf stderr "At offset %d: syntax error.\n%!" (Lexing.lexeme_start lexbuf); ((Stack.create ()), [], 0)
   
 (* | MiniOO_LEX.Error msg ->
 Printf.fprintf stderr "%s%!" msg *)

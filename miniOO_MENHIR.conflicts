@@ -1,70 +1,4 @@
 
-** Conflict (shift/reduce) in state 75.
-** Tokens involved: WHILE VAR_DECL VAR SKIP MALLOC LBRACE IF ATOM
-** The following explanations concentrate on token WHILE.
-** This state is reached from prog after reading:
-
-WHILE expr LT PROC_DECL VAR COLON WHILE boolean 
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-prog 
-cmds EOF 
-(?)
-
-** In state 75, looking ahead at WHILE, shifting is permitted
-** because of the following sub-derivation:
-
-WHILE boolean cmds 
-      expr LT expr 
-              PROC_DECL VAR COLON cmds 
-                                  WHILE boolean cmds 
-                                                . WHILE boolean cmds 
-
-** In state 75, looking ahead at WHILE, reducing production
-** cmds -> 
-** is permitted because of the following sub-derivation:
-
-WHILE boolean cmds // lookahead token appears because cmds can begin with WHILE
-      expr LT expr // lookahead token is inherited
-              PROC_DECL VAR COLON cmds // lookahead token is inherited
-                                  WHILE boolean cmds // lookahead token is inherited
-                                                . 
-
-** Conflict (shift/reduce) in state 67.
-** Tokens involved: WHILE VAR_DECL VAR SKIP MALLOC LBRACE IF ATOM
-** The following explanations concentrate on token WHILE.
-** This state is reached from prog after reading:
-
-WHILE expr LT PROC_DECL VAR COLON IF boolean cmds ELSE 
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-prog 
-cmds EOF 
-(?)
-
-** In state 67, looking ahead at WHILE, shifting is permitted
-** because of the following sub-derivation:
-
-WHILE boolean cmds 
-      expr LT expr 
-              PROC_DECL VAR COLON cmds 
-                                  IF boolean cmds ELSE cmds 
-                                                       . WHILE boolean cmds 
-
-** In state 67, looking ahead at WHILE, reducing production
-** cmds -> 
-** is permitted because of the following sub-derivation:
-
-WHILE boolean cmds // lookahead token appears because cmds can begin with WHILE
-      expr LT expr // lookahead token is inherited
-              PROC_DECL VAR COLON cmds // lookahead token is inherited
-                                  IF boolean cmds ELSE cmds // lookahead token is inherited
-                                                       . 
-
 ** Conflict (shift/reduce) in state 64.
 ** Tokens involved: WHILE VAR_DECL VAR SKIP MALLOC LBRACE IF ATOM
 ** The following explanations concentrate on token WHILE.
@@ -77,6 +11,7 @@ WHILE expr LT PROC_DECL VAR COLON cmd SEMICOLON
 
 prog 
 cmds EOF 
+cmd SEMICOLON cmds 
 (?)
 
 ** In state 64, looking ahead at WHILE, shifting is permitted
@@ -86,6 +21,7 @@ WHILE boolean cmds
       expr LT expr 
               PROC_DECL VAR COLON cmds 
                                   cmd SEMICOLON cmds 
+                                                cmd SEMICOLON cmds 
                                                 . WHILE boolean cmds 
 
 ** In state 64, looking ahead at WHILE, reducing production
@@ -97,138 +33,6 @@ WHILE boolean cmds // lookahead token appears because cmds can begin with WHILE
               PROC_DECL VAR COLON cmds // lookahead token is inherited
                                   cmd SEMICOLON cmds // lookahead token is inherited
                                                 . 
-
-** Conflict (shift/reduce) in state 46.
-** Tokens involved: TIMES PLUS MINUS DIV
-** The following explanations concentrate on token TIMES.
-** This state is reached from prog after reading:
-
-WHILE PROC_DECL VAR COLON WHILE expr GEQ expr 
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-prog 
-cmds EOF 
-WHILE boolean cmds 
-      expr EQUALITY expr 
-      (?)
-
-** In state 46, looking ahead at TIMES, reducing production
-** boolean -> expr GEQ expr 
-** is permitted because of the following sub-derivation:
-
-expr TIMES expr // lookahead token appears
-PROC_DECL VAR COLON cmds // lookahead token is inherited
-                    WHILE boolean cmds // lookahead token is inherited because cmds can vanish
-                          expr GEQ expr . 
-
-** In state 46, looking ahead at TIMES, shifting is permitted
-** because of the following sub-derivation:
-
-PROC_DECL VAR COLON cmds 
-                    WHILE boolean cmds 
-                          expr GEQ expr 
-                                   expr . TIMES expr 
-
-** Conflict (shift/reduce) in state 44.
-** Tokens involved: TIMES PLUS MINUS DIV
-** The following explanations concentrate on token TIMES.
-** This state is reached from prog after reading:
-
-WHILE PROC_DECL VAR COLON WHILE expr GT expr 
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-prog 
-cmds EOF 
-WHILE boolean cmds 
-      expr EQUALITY expr 
-      (?)
-
-** In state 44, looking ahead at TIMES, reducing production
-** boolean -> expr GT expr 
-** is permitted because of the following sub-derivation:
-
-expr TIMES expr // lookahead token appears
-PROC_DECL VAR COLON cmds // lookahead token is inherited
-                    WHILE boolean cmds // lookahead token is inherited because cmds can vanish
-                          expr GT expr . 
-
-** In state 44, looking ahead at TIMES, shifting is permitted
-** because of the following sub-derivation:
-
-PROC_DECL VAR COLON cmds 
-                    WHILE boolean cmds 
-                          expr GT expr 
-                                  expr . TIMES expr 
-
-** Conflict (shift/reduce) in state 42.
-** Tokens involved: TIMES PLUS MINUS DIV
-** The following explanations concentrate on token TIMES.
-** This state is reached from prog after reading:
-
-WHILE PROC_DECL VAR COLON WHILE expr LEQ expr 
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-prog 
-cmds EOF 
-WHILE boolean cmds 
-      expr EQUALITY expr 
-      (?)
-
-** In state 42, looking ahead at TIMES, reducing production
-** boolean -> expr LEQ expr 
-** is permitted because of the following sub-derivation:
-
-expr TIMES expr // lookahead token appears
-PROC_DECL VAR COLON cmds // lookahead token is inherited
-                    WHILE boolean cmds // lookahead token is inherited because cmds can vanish
-                          expr LEQ expr . 
-
-** In state 42, looking ahead at TIMES, shifting is permitted
-** because of the following sub-derivation:
-
-PROC_DECL VAR COLON cmds 
-                    WHILE boolean cmds 
-                          expr LEQ expr 
-                                   expr . TIMES expr 
-
-** Conflict (shift/reduce) in state 40.
-** Tokens involved: TIMES PLUS MINUS DIV
-** The following explanations concentrate on token TIMES.
-** This state is reached from prog after reading:
-
-WHILE PROC_DECL VAR COLON WHILE expr LT expr 
-
-** The derivations that appear below have the following common factor:
-** (The question mark symbol (?) represents the spot where the derivations begin to differ.)
-
-prog 
-cmds EOF 
-WHILE boolean cmds 
-      expr EQUALITY expr 
-      (?)
-
-** In state 40, looking ahead at TIMES, reducing production
-** boolean -> expr LT expr 
-** is permitted because of the following sub-derivation:
-
-expr TIMES expr // lookahead token appears
-PROC_DECL VAR COLON cmds // lookahead token is inherited
-                    WHILE boolean cmds // lookahead token is inherited because cmds can vanish
-                          expr LT expr . 
-
-** In state 40, looking ahead at TIMES, shifting is permitted
-** because of the following sub-derivation:
-
-PROC_DECL VAR COLON cmds 
-                    WHILE boolean cmds 
-                          expr LT expr 
-                                  expr . TIMES expr 
 
 ** Conflict (shift/reduce) in state 10.
 ** Tokens involved: WHILE VAR_DECL VAR SKIP MALLOC LBRACE IF ATOM
@@ -242,6 +46,7 @@ WHILE expr LT PROC_DECL VAR COLON
 
 prog 
 cmds EOF 
+cmd SEMICOLON cmds 
 (?)
 
 ** In state 10, looking ahead at WHILE, shifting is permitted
@@ -250,6 +55,7 @@ cmds EOF
 WHILE boolean cmds 
       expr LT expr 
               PROC_DECL VAR COLON cmds 
+                                  cmd SEMICOLON cmds 
                                   . WHILE boolean cmds 
 
 ** In state 10, looking ahead at WHILE, reducing production
