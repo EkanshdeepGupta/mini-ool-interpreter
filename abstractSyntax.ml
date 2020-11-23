@@ -5,7 +5,7 @@ type var = string
 
 type iden =
 | Var of var
-| Deref of var * iden
+| Deref of var * iden (* Calling v.F <-- this action as "dereferencing". Too late to change xD *)
 
 type expr =
 | Num of int
@@ -32,7 +32,7 @@ stmt =
 | Skip
 
 and
-stmtlist = (* Big error. One While loop cannot be followed by statements after the loop terminates*)
+stmtlist =
 | Empty
 | Stmt of stmt * stmtlist
 

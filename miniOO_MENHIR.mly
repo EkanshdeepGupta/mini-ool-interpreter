@@ -18,9 +18,9 @@ open AbstractSyntax
 %type <AbstractSyntax.iden> iden
 %type <AbstractSyntax.iden> iden_fields
 %type <AbstractSyntax.boolexp> boolean /* want boolean here */
-%nonassoc EQUALITY
 %left PLUS MINUS          /* lowest precedence  */
 %left TIMES DIV           /* medium precedence  */
+%left EQUALITY LEQ GEQ LT GT
 %nonassoc UMINUS          /* highest precedence */
 
 %% /* rules */
