@@ -2,7 +2,7 @@ open AbstractSyntax;;
 
 module VarSet = Set.Make(String);;
 
-let rec check_prog (Stmtlist p)= check_stmt_list p VarSet.empty 
+let rec check_prog (Stmtlist p) = check_stmt_list p VarSet.empty 
 
 and
 check_stmt_list p v0 = match p with
@@ -36,6 +36,4 @@ check_bool b v0 = match b with
   Bool b0 -> false
 | Expression (e1, bO, e2) -> (check_exp e1 v0) || (check_exp e2 v0)
 
-(* To be amended *)
 let static_check = check_prog
-(* static_check (Stmtlist p) = if not staticCheck (Stmtlist p) then executeProg (Stmtlist p) else    *)
