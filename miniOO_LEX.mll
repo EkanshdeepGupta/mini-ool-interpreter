@@ -2,6 +2,7 @@
 {
 open MiniOO_MENHIR;; (* Type token defined in miniOO_MENHIR.mli *)
 exception Eof;;
+exception Failure of string;;
 }
 rule token = parse
   | [' ' '\t' '\n'] { token lexbuf } (* skip blanks and tabs *) (* removed newline token *)
@@ -38,6 +39,7 @@ rule token = parse
   | '(' { LPAREN }
   | ')' { RPAREN }  
   | eof { EOF }
+  | _ { raise (Failure ("Lexer failed. " ^ Printf.sprintf "At offset %d: unexpected character.\n" (Lexing.lexeme_start lexbuf))) }
 
 {
 

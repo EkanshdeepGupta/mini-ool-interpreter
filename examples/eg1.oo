@@ -1,0 +1,6 @@
+var x;
+var y;
+y = proc z: ;
+y(4);
+x = 2;
+y = 5;

@@ -3,14 +3,13 @@ open Stack;;
 open Printf;;
 open OperationalTypes;;
 
-let rec string_of_list string_of_function l = "[" ^ (string_of_list2 string_of_function l)
+let rec string_of_list string_of_function l = "[ " ^ (string_of_list2 string_of_function l)
 (* General function for lists. string_of_function converts elements of lists to strings*)
 
 and
 string_of_list2 string_of_function l = match l with
-    | h1::h2::t -> string_of_function h1 ^ ", " ^ (string_of_list2 string_of_function (h2::t))
-    | h::[] -> string_of_function h ^ "]"
-    | [] -> "]"
+    | h::t -> string_of_function h ^ (if List.length t > 0 then ", " else "") ^ (string_of_list2 string_of_function t)
+    | [] -> " ]"
 
 let rec string_of_boolOperator bO = match bO with
   Lt ->  "Lt"
@@ -87,19 +86,26 @@ and
 string_of_env env = "Env: " ^ (string_of_list string_of_func_env env)
 
 and
-string_of_state (stk, hp, addr) = "Printing State: \nStack: " ^ string_of_stack stk ^ "\n\nHeap: " ^ string_of_heap hp
+string_of_state (stk, hp, addr) = "Printing State: \nStack: " ^ string_of_stack stk ^ "\n\nHeap: " ^ string_of_heap hp ^ "\n\nAddress: " ^ string_of_int addr
 
 and
-string_of_stack stk = "[ " ^ string_of_stack2 stk 
+string_of_stack stk = (Stack.fold string_of_stack_fold "[ " stk) ^ " ]"
 
 and
-string_of_stack2 stk =  if is_empty stk then "]" else
-    let top = pop stk in match top with
-      Decl env -> "(Decl - " ^ string_of_env env ^ ")" ^ (if length stk > 0 then ", " else "")
-    | Call (env, stk2) -> "(Call - " ^ string_of_env env ^ string_of_stack stk2 ^ ")" ^ (if length stk > 0 then ", " else "")
+string_of_stack_fold s elem = s ^ ", " ^ (string_of_stack_elem elem)
+
+and
+string_of_stack_elem elem = match elem with
+  Decl env -> "(Decl - " ^ string_of_env env ^ ")"
+| Call (env, stk2) -> "(Call - " ^ string_of_env env (*^ string_of_stack stk2 ^ ")" *)
+(* TO DO: This is causing Stack_overflow. Some infinite loop or something. Now sure why; have to debug *)
+
 
 and
 string_of_func_hp ((obj, s), tval) = sprintf "((%s, %s), %s)" (string_of_int obj) s (string_of_tval tval)
 
 and
 string_of_heap hp = string_of_list string_of_func_hp hp
+
+and
+string_of_heap_location (obj, s) = sprintf "(%s, %s)" (string_of_int obj) s
