@@ -102,16 +102,19 @@ and
 string_of_state (stk, hp, addr) = "Printing State: \nStack: " ^ string_of_stack stk ^ "\n\nHeap: " ^ string_of_heap hp ^ "\n\nAddress: " ^ string_of_int addr
 
 and
-string_of_stack stk = (Stack.fold string_of_stack_fold "[ " stk) ^ " ]"
+string_of_stack stk = if Stack.is_empty stk then
+        "[ ]"
+    else
+        let my_string = (Stack.fold string_of_stack_fold "[ " stk) in (String.sub my_string 0 ((String.length my_string) - 2))  ^ " ]"
+(* Take substring to remove last `,` at the end. *)
 
 and
-string_of_stack_fold s elem = s ^ ", " ^ (string_of_stack_elem elem)
+string_of_stack_fold s elem = s ^ (string_of_stack_elem elem) ^ ",\n"
 
 and
 string_of_stack_elem elem = match elem with
   Decl env -> "(Decl - " ^ string_of_env env ^ ")"
-| Call (env, stk2) -> "(Call - )" ^ string_of_env env (*^ string_of_stack stk2 ^ ")" *)
-(* TO DO: This is causing Stack_overflow. Some infinite loop or something. Now sure why; have to debug *)
+| Call (env, stk2) -> "(Call - Env = " ^ string_of_env env ^ ", Stack = "^ string_of_stack stk2 ^ ")"
 
 and
 string_of_func_hp ((obj, s), tval) = sprintf "((%s, %s), %s)" (string_of_int obj) s (string_of_tval tval)
