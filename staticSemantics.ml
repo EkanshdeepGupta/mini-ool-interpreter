@@ -1,4 +1,5 @@
 open AbstractSyntax;;
+open PrintStuff;;
 
 module VarSet = Set.Make(String);;
 
@@ -29,8 +30,8 @@ check_exp e v0 = match e with
 
 and
 check_iden i v0 = match i with
-  Var v -> not (VarSet.mem v v0)
-| Deref (v,i) -> not (VarSet.mem v v0) 
+  Var v -> if not (VarSet.mem v v0) then print_string ("Variable " ^ v ^ " not in the scope.\n") else (); not (VarSet.mem v v0)
+| Deref (v,i) -> if not (VarSet.mem v v0) then print_string ("Variable " ^ v ^ " not in the scope.\n") else (); not (VarSet.mem v v0) 
 
 and
 check_bool b v0 = match b with

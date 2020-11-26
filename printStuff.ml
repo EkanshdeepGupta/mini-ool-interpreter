@@ -4,6 +4,8 @@ open Printf;;
 open OperationalTypes;;
 open Str;;
 
+(* Helper functions: *)
+
 let rec string_of_list string_of_function l = "[ " ^ (string_of_list2 string_of_function l)
 (* General function for lists. string_of_function converts elements of lists to strings*)
 
@@ -13,6 +15,11 @@ string_of_list2 string_of_function l = match l with
     | [] -> " ]"
 
 let indent_string s = global_replace (regexp "\n") "\n\t" s
+
+
+(* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+            String of Abstract Syntax Types:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ *)
 
 let rec string_of_boolOperator bO = match bO with
   Lt ->  "Lt"
@@ -68,7 +75,9 @@ and
 string_of_prog (Stmtlist p) = string_of_stmtlist p
 
 
-(* ------------------------------- *)
+(* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+            String of Operational Types: 
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ *)
 
 let rec string_of_loc l = match l with
     | Obj obj -> "Obj " ^ string_of_int obj
@@ -103,7 +112,6 @@ string_of_stack_elem elem = match elem with
   Decl env -> "(Decl - " ^ string_of_env env ^ ")"
 | Call (env, stk2) -> "(Call - )" ^ string_of_env env (*^ string_of_stack stk2 ^ ")" *)
 (* TO DO: This is causing Stack_overflow. Some infinite loop or something. Now sure why; have to debug *)
-
 
 and
 string_of_func_hp ((obj, s), tval) = sprintf "((%s, %s), %s)" (string_of_int obj) s (string_of_tval tval)
