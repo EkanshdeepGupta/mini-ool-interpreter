@@ -20,7 +20,6 @@ open AbstractSyntax
 %type <AbstractSyntax.boolexp> boolean /* want boolean here */
 %left PLUS MINUS          /* lowest precedence  */
 %left TIMES DIV           /* medium precedence  */
-%left EQUALITY LEQ GEQ LT GT
 %nonassoc UMINUS          /* highest precedence */
 
 %% /* rules */
@@ -57,7 +56,10 @@ boolean :
 expr :
     LPAREN e=expr RPAREN {e}
   | n=NUM {Num n}
-  | MINUS n=expr %prec UMINUS {let fn (Num n) = n in Num (-1 * (fn n))}
+  | MINUS n=expr %prec UMINUS {match n with
+    | Num n -> Num (-1 * n)
+    | _ -> raise (Failure "Parsing error. - only applies to integers")
+  }
   | n1=expr DIV n2=expr {Arith (n1, Div, n2)}
   | n1=expr TIMES n2=expr {Arith (n1, Times, n2)}
   | n1=expr PLUS n2=expr {Arith (n1, Plus, n2)}
