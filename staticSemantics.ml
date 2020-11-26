@@ -18,7 +18,7 @@ check_stmt_list p v0 = match p with
 	| Atom l -> (check_stmt_list l v0)
 	| Parallel (l1, l2) -> (check_stmt_list l1 v0) || (check_stmt_list l2 v0)
 	| Skip -> (check_stmt_list l v0)
-    | Print i -> (check_iden i v0) || (check_stmt_list l v0)
+    | Print e -> (check_exp e v0) || (check_stmt_list l v0)
 
 and
 check_exp e v0 = match e with 

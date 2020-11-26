@@ -41,7 +41,7 @@ cmd :
   | IF b=boolean l1=cmds ELSE l2=cmds {If (b, l1, l2)}
   | ATOM LPAREN l=cmds RPAREN {Atom l}
   | LBRACE l1=cmds PARALLEL l2=cmds RBRACE {Parallel (l1, l2)}
-  | PRINT LPAREN i=iden RPAREN {Print i}
+  | PRINT LPAREN e=expr RPAREN {Print e}
   | SKIP {Skip}
 
 boolean :

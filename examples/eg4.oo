@@ -1,0 +1,5 @@
+var x;
+x.F = -1;
+x.F2 = -12;
+print(x.F + x.F2);
+print(x);

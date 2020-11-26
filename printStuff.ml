@@ -18,7 +18,7 @@ let indent_string s = global_replace (regexp "\n") "\n\t" s
 
 
 (* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-            String of Abstract Syntax Types:
+            String_of Abstract Syntax Types:
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ *)
 
 let rec string_of_boolOperator bO = match bO with
@@ -64,7 +64,7 @@ string_of_stmt s = match s with
 | If (b, s1, s2) ->  "If: (" ^ string_of_boolexp b ^ ", Then: " ^ string_of_stmtlist s1 ^ ", Else: " ^ string_of_stmtlist s2 ^ ")"
 | Atom l ->  "Atom: (" ^ string_of_stmtlist l ^ ")"
 | Parallel (l1, l2) ->  "Parallel: (" ^ string_of_stmtlist l1 ^  "|||" ^ string_of_stmtlist l2 ^ ")"
-| Print i -> "Print: " ^ string_of_iden i
+| Print e -> "Print: " ^ string_of_expr e
 
 and
 string_of_stmtlist sl = match sl with
@@ -76,7 +76,7 @@ string_of_prog (Stmtlist p) = string_of_stmtlist p
 
 
 (* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-            String of Operational Types: 
+            String_of Operational Types: 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ *)
 
 let rec string_of_loc l = match l with

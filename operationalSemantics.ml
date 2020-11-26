@@ -75,8 +75,8 @@ exec_stmtlist (p : stmtlist) ((stk, hp, addr) : state) = match p with (* stack, 
     | Atom l1 -> exec_stmtlist l (exec_stmtlist l1 (stk, hp, addr))
     | Parallel (l1, l2) -> exec_stmtlist l (exec_stmtlist l2 (exec_stmtlist l1 (stk, hp, addr)))
     | Skip -> exec_stmtlist l (stk, hp, addr)
-    | Print i -> (
-        print_string (string_of_iden i ^ ": " ^ (string_of_tval (eval_expr (Iden i) (stk, hp, addr))) ^ "\n");
+    | Print e -> (
+        print_string (string_of_expr e ^ " \t : \t " ^ (string_of_tval (eval_expr e (stk, hp, addr))) ^ "\n");
         exec_stmtlist l (stk, hp, addr)
     )
 
