@@ -56,7 +56,8 @@ exec_stmtlist (p : stmtlist) ((stk, hp, addr) : state) = match p with (* stack, 
     | If (b, l1, l2) -> if eval_bool b (stk, hp, addr) then let new_state = exec_stmtlist l1 (stk, hp, addr) in exec_stmtlist l new_state else let new_state = exec_stmtlist l2 (stk, hp, addr) in exec_stmtlist l new_state
     | Atom l1 -> exec_stmtlist l (exec_stmtlist l1 (stk, hp, addr))
     | Parallel (l1, l2) -> exec_stmtlist l (exec_stmtlist l2 (exec_stmtlist l1 (stk, hp, addr)))
-    | Skip -> exec_stmtlist l (stk, hp, addr) (* TO DO: Implement Skip correctly. *)
+    | Skip -> exec_stmtlist l (stk, hp, addr)
+    | Print i -> (print_string (string_of_iden i ^ ": " ^ (string_of_tval (eval_expr (Iden i) (stk, hp, addr))) ^ "\n"); exec_stmtlist l (stk, hp, addr))
 
 and
 exec_block (p: stmtlist ) ((stk, hp, addr) : state) = let (new_stk, new_hp, new_addr) = exec_stmtlist p (stk, hp, addr) in

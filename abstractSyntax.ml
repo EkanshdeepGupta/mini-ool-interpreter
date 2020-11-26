@@ -28,6 +28,7 @@ stmt =
 | While of boolexp * stmtlist 
 | If of boolexp * stmtlist * stmtlist (* 1st stmtlist if boolexp is true, 2nd for `else`. *) 
 | Atom of stmtlist
+| Print of iden
 | Parallel of stmtlist * stmtlist
 | Skip
 

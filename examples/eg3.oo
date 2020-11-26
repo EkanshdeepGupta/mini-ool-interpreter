@@ -1,2 +1,15 @@
 var x;
-x = 1; 
+x = 1;
+var fact;
+fact = proc z: 
+    print(z);
+    if (z == 0)
+        skip;
+    else
+        x = x * z;
+        print(x);
+        fact(z-1);
+        ;
+    ;
+fact(6);
+print(x);

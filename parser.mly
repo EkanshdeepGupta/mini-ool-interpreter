@@ -3,7 +3,7 @@ open AbstractSyntax
 %} /* declarations */
 
 %token EOF NULL PROC_DECL VAR_DECL MALLOC  /* lexer tokens */
-%token SKIP WHILE IF ELSE PARALLEL ATOM
+%token SKIP WHILE IF ELSE PARALLEL ATOM PRINT
 %token EQUALITY LEQ GEQ LT GT
 %token COLON SEMICOLON ASSIGN DEREFERENCE
 %token PLUS MINUS TIMES DIV LPAREN RPAREN LBRACE RBRACE
@@ -42,6 +42,7 @@ cmd :
   | IF b=boolean l1=cmds ELSE l2=cmds {If (b, l1, l2)}
   | ATOM LPAREN l=cmds RPAREN {Atom l}
   | LBRACE l1=cmds PARALLEL l2=cmds RBRACE {Parallel (l1, l2)}
+  | PRINT LPAREN i=iden RPAREN {Print i}
   | SKIP {Skip}
 
 boolean :

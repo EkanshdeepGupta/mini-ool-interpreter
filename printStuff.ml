@@ -2,14 +2,17 @@ open AbstractSyntax;;
 open Stack;;
 open Printf;;
 open OperationalTypes;;
+open Str;;
 
 let rec string_of_list string_of_function l = "[ " ^ (string_of_list2 string_of_function l)
 (* General function for lists. string_of_function converts elements of lists to strings*)
 
 and
 string_of_list2 string_of_function l = match l with
-    | h::t -> string_of_function h ^ (if List.length t > 0 then ", " else "") ^ (string_of_list2 string_of_function t)
+    | h::t -> string_of_function h ^ (if List.length t > 0 then ",\n" else "") ^ (string_of_list2 string_of_function t)
     | [] -> " ]"
+
+let indent_string s = global_replace (regexp "\n") "\n\t" s
 
 let rec string_of_boolOperator bO = match bO with
   Lt ->  "Lt"
@@ -46,19 +49,20 @@ string_of_boolexp b = match b with
 and
 string_of_stmt s = match s with
   Declare v ->  "Declare: " ^  v
-| Call (id, e) ->  "Call: (" ^ string_of_iden id ^ ", " ^ string_of_expr e ^ ")"
+| Call (id, e) ->  "Call: ((" ^ string_of_iden id ^ "), Argument: " ^ string_of_expr e ^ ")"
 | Malloc v ->  "Malloc: " ^  v
-| Assign (id, e) ->  "Assign: (" ^ string_of_iden id ^ ", " ^ string_of_expr e ^ ")"
+| Assign (id, e) ->  "Assign: (" ^ string_of_iden id ^ " := " ^ string_of_expr e ^ ")"
 | Skip ->  "Skip. "
-| While (b, s) ->  "While: (" ^ string_of_boolexp b ^ ", " ^ string_of_stmtlist s ^ ")"
-| If (b, s1, s2) ->  "If: (" ^ string_of_boolexp b ^ ", " ^ string_of_stmtlist s1 ^ ", " ^ string_of_stmtlist s2 ^ ")"
+| While (b, s) ->  "While: (" ^ string_of_boolexp b ^ ", Then: " ^ string_of_stmtlist s ^ ")"
+| If (b, s1, s2) ->  "If: (" ^ string_of_boolexp b ^ ", Then: " ^ string_of_stmtlist s1 ^ ", Else: " ^ string_of_stmtlist s2 ^ ")"
 | Atom l ->  "Atom: (" ^ string_of_stmtlist l ^ ")"
 | Parallel (l1, l2) ->  "Parallel: (" ^ string_of_stmtlist l1 ^  "|||" ^ string_of_stmtlist l2 ^ ")"
+| Print i -> "Print: " ^ string_of_iden i
 
 and
 string_of_stmtlist sl = match sl with
   Empty -> ""
-| Stmt (s, s2) -> "Stmt: (" ^ string_of_stmt s ^ "\n" ^ string_of_stmtlist s2 ^ ")"
+| Stmt (s, s2) -> "Stmtlist: (" ^ "\n\t" ^ indent_string (string_of_stmt s ^ "\n" ^ string_of_stmtlist s2) ^ "\n)"
 
 and
 string_of_prog (Stmtlist p) = string_of_stmtlist p
@@ -97,7 +101,7 @@ string_of_stack_fold s elem = s ^ ", " ^ (string_of_stack_elem elem)
 and
 string_of_stack_elem elem = match elem with
   Decl env -> "(Decl - " ^ string_of_env env ^ ")"
-| Call (env, stk2) -> "(Call - " ^ string_of_env env (*^ string_of_stack stk2 ^ ")" *)
+| Call (env, stk2) -> "(Call - )" ^ string_of_env env (*^ string_of_stack stk2 ^ ")" *)
 (* TO DO: This is causing Stack_overflow. Some infinite loop or something. Now sure why; have to debug *)
 
 

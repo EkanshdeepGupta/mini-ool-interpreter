@@ -1,6 +1,6 @@
 (* File calculatorLEX.mll *)
 {
-open MiniOO_MENHIR;; (* Type token defined in miniOO_MENHIR.mli *)
+open Parser;; (* Type token defined in miniOO_MENHIR.mli *)
 exception Eof;;
 exception Failure of string;;
 }
@@ -18,6 +18,7 @@ rule token = parse
   | "else" { ELSE }
   | "|||" { PARALLEL }
   | "atom" { ATOM }
+  | "print" { PRINT }
   | (['a'-'z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'])* as idt { VAR idt }
   | (['A'-'Z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'])* as idt { FIELD idt }
   | ['0'-'9']+ as num { NUM (int_of_string num) }
