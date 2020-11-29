@@ -4,7 +4,7 @@ open OperationalTypes;;
 open OperationalSemantics;;
 open PrintStuff;;
 
-let ic = open_in Sys.argv.(1) in
+let ic = if Sys.argv.(1) = "-i" then stdin else open_in Sys.argv.(1) in
     let lexbuf = (Lexing.from_channel ic) in
         let abstractSyntaxTree = try
             Parser.prog Lexer.token lexbuf

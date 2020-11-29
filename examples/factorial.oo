@@ -9,7 +9,7 @@ fact = proc z:
         x = x * z;
         print(x);
         fact(z-1);
-        ;
     ;
+;
 fact(6);
 print(x);

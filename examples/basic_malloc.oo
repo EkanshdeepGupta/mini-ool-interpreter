@@ -1,0 +1,12 @@
+var r; 
+{
+    r = 1;
+    if r == 1 
+        var x;
+        malloc(x);
+        
+    else 
+        var y; 
+        r.F = 3;
+    ;
+}

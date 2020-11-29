@@ -1,6 +1,7 @@
 var x;
 var y;
 y = proc z: ;
+print(y);
 y(4);
 x = 2;
 y = 5;

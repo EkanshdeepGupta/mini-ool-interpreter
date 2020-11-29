@@ -19,8 +19,8 @@ rule token = parse
   | "|||" { PARALLEL }
   | "atom" { ATOM }
   | "print" { PRINT }
-  | (['a'-'z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'])* as idt { VAR idt }
-  | (['A'-'Z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'])* as idt { FIELD idt }
+  | (['a'-'z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')* as idt { VAR idt }
+  | (['A'-'Z'])(['a'-'z'] | ['A'-'Z'] | ['0'-'9'] | '_')* as idt { FIELD idt }
   | ['0'-'9']+ as num { NUM (int_of_string num) }
   | "==" { EQUALITY } (* decide whether use a string or two chars *)
   | "<=" { LEQ }
