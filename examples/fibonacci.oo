@@ -16,6 +16,6 @@ fibonacci = proc n:
 ;
 
 var n;
-n = 5;
+n = 10;
 fibonacci(n); 
 print(r);

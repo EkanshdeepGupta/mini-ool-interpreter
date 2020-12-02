@@ -1,0 +1,9 @@
+var x;
+x = 1;
+x.F = 5;
+print(x);
+print(x.F);
+
+malloc(x);
+print(x);
+print(x.F); 

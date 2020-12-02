@@ -9,5 +9,9 @@ var x;
                 x.F(y-1);
             ;
         ;
+                    
+        print(x);
+        print(x.F);
+        print(x.C);
     }
 }

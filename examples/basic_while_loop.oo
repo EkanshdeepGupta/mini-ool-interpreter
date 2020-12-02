@@ -5,4 +5,6 @@ b = 1;
 while b < 35 {
     b = b + a;
     a = b - a;
+    print(a);
+    print(b);
 };

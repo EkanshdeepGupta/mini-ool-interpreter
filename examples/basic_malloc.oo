@@ -4,6 +4,7 @@ var r;
     if r == 1 
         var x;
         malloc(x);
+        print(x);
         
     else 
         var y; 
