@@ -3,7 +3,7 @@ var x;
     {
         x.C = 0;
         x.F = proc y: 
-            if y < 1 
+            if (y < 1) 
                 x.R = x.C; 
             else 
                 x.F(y-1);

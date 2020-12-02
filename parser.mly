@@ -37,16 +37,15 @@ cmd :
   | i=iden LPAREN e=expr RPAREN {Call (i, e)}
   | MALLOC LPAREN v=VAR RPAREN {Malloc v}
   | i=iden ASSIGN e=expr {Assign (i,e)}
-  | WHILE b=boolean l=cmds {While (b, l)}
-  | IF b=boolean l1=cmds ELSE l2=cmds {If (b, l1, l2)}
+  | WHILE LPAREN b=boolean RPAREN l=cmds {While (b, l)}
+  | IF LPAREN b=boolean RPAREN l1=cmds ELSE l2=cmds {If (b, l1, l2)}
   | ATOM LPAREN l=cmds RPAREN {Atom l}
   | LBRACE l1=cmds PARALLEL l2=cmds RBRACE {Parallel (l1, l2)}
   | PRINT LPAREN e=expr RPAREN {Print e}
   | SKIP {Skip}
 
 boolean :
-    LPAREN b=boolean RPAREN {b}
-  | b=BOOL {Bool b}
+    b=BOOL {Bool b}
   | e1=expr EQUALITY e2=expr {Expression (e1, Eq, e2)}
   | e1=expr LT e2=expr {Expression (e1, Lt, e2)}
   | e1=expr GT e2=expr {Expression (e1, Gt, e2)}
