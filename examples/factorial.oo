@@ -2,14 +2,13 @@ var r;
 r = 1;
 var fact;
 fact = proc n: 
-    print(n);
     if (n == 0)
         skip;
     else
         r = r * n;
-        print(r);
         fact(n-1);
     ;
 ;
+
 fact(6);
 print(r);
