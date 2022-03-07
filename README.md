@@ -1,7 +1,7 @@
 # MiniOOL
 
 
-MiniOOL is a toy programming language which is described at [MiniOOL Syntax And Semantics](MiniOOL-Syntax-And-Semantics.pdf). This project is an implementation of a MiniOOL interpreter as part of the CSCI-GA.3110-001 Honors Programming Languages Course by [Patrick Cousot](https://cs.nyu.edu/~pcousot/) in Fall 2020.  
+MiniOOL is a toy programming language which is described at [MiniOOL Syntax And Semantics](MiniOOL-Syntax-And-Semantics.pdf). This project is an implementation of a MiniOOL interpreter as part of the CSCI-GA.3110-001 Honors Programming Languages Course by [Patrick Cousot](https://cs.nyu.edu/~pcousot/) in Fall 2020. Check out the [report](Ekanshdeep_Gupta_Report.pdf) for a more detailed summary of the code base.
   
   
 # Build
