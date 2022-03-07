@@ -9,7 +9,7 @@ MiniOOL can be built using the included [makefile](makefile). Run `make` to comp
 
 ## Dependencies
 Requires:
-- ocamlc >= 4.07.1
+- ocamlc >=4.07.1
 - ocamllex >= 4.07.1
 - menhir >= 20201216
 
