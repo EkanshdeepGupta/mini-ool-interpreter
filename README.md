@@ -14,6 +14,7 @@ Find example source code in [./examples](examples). Try the interpreter on the f
 ### 1: Basic Syntax  
   
 
+  
 [basic_1.oo](examples/basic_1.oo)
 ```
 var x;
@@ -27,6 +28,7 @@ print(x);
 print(y);
 ```
   
+
 Output:
 ```
 ~> ./main ./examples/basic_1.oo
@@ -95,6 +97,7 @@ p(1);
 print(p);
 ```
   
+
 Output:
 ```
 ~> ./main ./examples/basic_2.oo
@@ -185,6 +188,7 @@ fact(6);
 print(r);
 ```
   
+
 Output:
 ```
 ~> ./main ./examples/factorial.oo 
@@ -258,7 +262,7 @@ Heap: [ ((0, val), Val Int 720),
 Address: 9
 ```
   
-
+  
 ### Other examples:
   
 - Fibonacci recursive vs Fibonacci iterated:
