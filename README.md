@@ -1,26 +1,20 @@
 # MiniOOL
 
 
-Compiler for a toy language as part of the CSCI-GA.3110-001 Honors Programming Languages Course in Fall 2020. Built according to the spec described at [MiniOOL Syntax And Semantics.](MiniOOL-Syntax-And-Semantics.pdf)
-
-# Dependencies
-Requires:
-- ocamlc >= 4.07.1
-- ocamllex >= 4.07.1
-- menhir >= 20201216
-
-
+MiniOOL is a toy OOL language which is described at [MiniOOL Syntax And Semantics.](MiniOOL-Syntax-And-Semantics.pdf). This project is implementation of a MiniOOL interpreter as part of the CSCI-GA.3110-001 Honors Programming Languages Course by [Patrick Cousot](https://cs.nyu.edu/~pcousot/) in Fall 2020.  
+  
+  
 # Build
-Run `make` to compile project.
+MiniOOL can be built using the included [makefile](makefile). Run `make` to compile the source code.
 
 # Examples
 
-Find example source code in [./examples](examples). Try compiler using the following commands:
+Find example source code in [./examples](examples). Try the interpreter on the following examples demonstrating the syntax and functionality of the language.
 
-### 1: Basic Syntax
+### 1: Basic Syntax  
+  
 
-
-Code:
+[basic_1.oo](examples/basic_1.oo)
 ```
 var x;
 var y;
@@ -32,7 +26,7 @@ y = 5;
 print(x);
 print(y);
 ```
-
+  
 Output:
 ```
 ~> ./main ./examples/basic_1.oo
@@ -87,8 +81,12 @@ Heap: [ ((0, val), Val Int 2),
 
 Address: 3
 ```
-
+  
+  
 ### 2: Function definition
+  
+  
+[basic_2.oo](examples/basic_2.oo)
 ```
 var p;
 p = proc y: print(y); if (y < 1) p = 21; else p(y - 1);;;
@@ -96,7 +94,7 @@ print(p);
 p(1);
 print(p);
 ```
-
+  
 Output:
 ```
 ~> ./main ./examples/basic_2.oo
@@ -164,8 +162,12 @@ Heap: [ ((0, val), Val Int 21),
 Address: 3
 
 ```
+  
 
-3: Recursive Factorial
+### 3: Recursive Factorial
+  
+
+[factorial.oo](examples/factorial.oo)
 ```
 var r;
 r = 1;
@@ -182,7 +184,7 @@ fact = proc n:
 fact(6);
 print(r);
 ```
-
+  
 Output:
 ```
 ~> ./main ./examples/factorial.oo 
@@ -255,9 +257,9 @@ Heap: [ ((0, val), Val Int 720),
 
 Address: 9
 ```
+  
 
-Other examples:
-
+### Other examples:
+  
 - Fibonacci recursive vs Fibonacci iterated:
 `./main ./examples/fibonacci_recursive.oo` vs `./main ./examples/fibonacci_iterated.oo`
-
