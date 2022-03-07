@@ -1,21 +1,20 @@
 # MiniOOL
 
 
-MiniOOL is a toy OOL language which is described at [MiniOOL Syntax And Semantics.](MiniOOL-Syntax-And-Semantics.pdf). This project is implementation of a MiniOOL interpreter as part of the CSCI-GA.3110-001 Honors Programming Languages Course by [Patrick Cousot](https://cs.nyu.edu/~pcousot/) in Fall 2020.  
+MiniOOL is a toy programming language which is described at [MiniOOL Syntax And Semantics](MiniOOL-Syntax-And-Semantics.pdf). This project is an implementation of a MiniOOL interpreter as part of the CSCI-GA.3110-001 Honors Programming Languages Course by [Patrick Cousot](https://cs.nyu.edu/~pcousot/) in Fall 2020.  
   
   
 # Build
 MiniOOL can be built using the included [makefile](makefile). Run `make` to compile the source code.
 
 ## Dependencies
-Requires:
 - ocamlc >= 4.07.1
 - ocamllex >= 4.07.1
 - menhir >= 20201216
 
 # Examples
 
-Find example source code in [./examples](examples). Try the interpreter on the following examples demonstrating the syntax and functionality of the language.
+Find example source code in [./examples](examples). Try the interpreter on the following examples demonstrating the syntax and functionality of MiniOOL.
 
 ### 1: Basic Syntax  
   
