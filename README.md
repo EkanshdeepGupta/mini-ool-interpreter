@@ -259,5 +259,5 @@ Address: 9
 Other examples:
 
 - Fibonacci recursive vs Fibonacci iterated:
-Run `./main ./examples/fibonacci.oo` and `./main ./examples/fibonacci_iterated.oo` to see the two ways to implement Fibonacci numbers.
+`./main ./examples/fibonacci_recursive.oo` vs `./main ./examples/fibonacci_iterated.oo`
 
